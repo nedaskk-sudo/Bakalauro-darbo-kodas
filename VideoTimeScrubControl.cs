@@ -148,16 +148,23 @@ namespace Unity.VRTemplate
 
             // Show buttons at chosen video time
             //# Šis kodas buvo sugeneruotas naudojant ChatGPT (GPT-4.5, 2026-05-24).
-            //# Užklausa: "heres code for a video player. I want for the choice buttons to apear at a certain point in the video, make the code work" 
+            //# Užklausa: "heres code for a video player. I want for the choice buttons to apear at a certain point in the video" 
             //# Rezultatas dalinai koreguotas.
 
-            if (!m_EndButtonsShown && m_VideoPlayer.time >= m_ShowButtonsAtTime)
+            //tikrinama ar mygtukai dar nebuvo parodyti ir ar vaizdo įrašas pasiekė nurodyta laiką
+            //kada pasirinkimų mygtukai turi pasirodyti
+            if (!m_EndButtonsShown && m_VideoPlayer.time >= m_ShowButtonsAtTime) 
             {
+                //pažymima, kad mygtukai jau buvo parodyti
                 m_EndButtonsShown = true;
-
+                
+                //Jeigu dešinysis mygtukas egzistuoja,
+                //padaro jį matomu ir aktyviu
                 if (m_EndButtondesine != null)
                     m_EndButtondesine.SetActive(true);
 
+                //Jeigu kairysis mygtukas egzistuoja,
+                //padaro jį matomu ir aktyviu
                 if (m_EndButtonkaire != null)
                     m_EndButtonkaire.SetActive(true);
             }
@@ -276,20 +283,24 @@ namespace Unity.VRTemplate
 
         }
 
+        //Iškviečiamas paspaudus dešinijį pasirinkimo mygtuką
         public void OnButtonEnddesine()
         {
+            //paslepia dabartini vaizdo grotuvo UI
             if (dabartinisUI != null)
                 dabartinisUI.SetActive(false);
-
+            //Parodo kito vaizdo grotuvo UI
             if (SekantisUIdesine != null)
                 SekantisUIdesine.SetActive(true);
         }
 
+        //Iškviečiamas paspaudus kairijį pasirinkimo mygtuką
         public void OnButtonEndkaire()
         {
+            //paslepia dabartini vaizdo grotuvo UI
             if (dabartinisUI != null)
                 dabartinisUI.SetActive(false);
-
+            //Parodo kito vaizdo grotuvo UI
             if (SekantisUIIkaire != null)
                 SekantisUIIkaire.SetActive(true);
         }
